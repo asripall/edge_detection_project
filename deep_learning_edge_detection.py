@@ -59,7 +59,7 @@ if not os.path.exists(image_path):
 img = cv2.imread(image_path)
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-# Resize for the model (U-Net typically expects specific dimensions)
+# Resize for the model
 img_resized = cv2.resize(img_rgb, (256, 256))
 
 # Convert to PyTorch tensor
@@ -67,9 +67,6 @@ transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 img_tensor = transform(img_resized).unsqueeze(0)  # Add batch dimension
-
-# We would normally train the model here, but for this example
-# we'll just use it untrained to demonstrate the concept
 
 # Set model to evaluation mode
 model.eval()
